@@ -1,0 +1,319 @@
+/*
+   YouTube Video Yükleme Sistemi - Stil Dosyası
+   Tüm sayfalar için genel stiller ve tema tanımlamaları
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Ana Renkler */
+    --renk-ana: #667eea;
+    --renk-ikincil: #764ba2;
+    --renk-basarili: #27ae60;
+    --renk-hata: #e74c3c;
+    --renk-uyari: #f39c12;
+    --renk-bilgi: #00bcd4;
+
+    /* Metin Renkleri */
+    --renk-metin-koyu: #333;
+    --renk-metin-orta: #666;
+    --renk-metin-ac: #999;
+
+    /* Arkaplan Renkleri */
+    --renk-arka-beyaz: #ffffff;
+    --renk-arka-ac: #f8f9fa;
+
+    /* Temel Boyutlar */
+    --boyut-padding-kucuk: 10px;
+    --boyut-padding-orta: 20px;
+    --boyut-padding-buyuk: 40px;
+
+    /* Geçiş Süresi */
+    --gecis-hızlı: 0.2s;
+    --gecis-normal: 0.3s;
+    --gecis-yavas: 0.5s;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--renk-metin-orta);
+    background: var(--renk-arka-ac);
+    line-height: 1.6;
+}
+
+/* Linkler */
+a {
+    color: var(--renk-ana);
+    text-decoration: none;
+    transition: all var(--gecis-normal) ease;
+}
+
+a:hover {
+    color: var(--renk-ikincil);
+}
+
+/* Butonlar */
+button {
+    font-family: inherit;
+}
+
+/* Başlıklar */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--renk-metin-koyu);
+    margin-bottom: var(--boyut-padding-orta);
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Form Elemanları */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: all var(--gecis-normal) ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--renk-ana);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Scroll Bar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--renk-arka-ac);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--renk-ana);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--renk-ikincil);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    :root {
+        --boyut-padding-buyuk: 25px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+}
+
+/* Utility Classes */
+.gizli {
+    display: none;
+}
+
+.orta-alan {
+    text-align: center;
+}
+
+.sag-alan {
+    text-align: right;
+}
+
+.sol-alan {
+    text-align: left;
+}
+
+.margin-ustunde {
+    margin-top: var(--boyut-padding-orta);
+}
+
+.margin-altinda {
+    margin-bottom: var(--boyut-padding-orta);
+}
+
+.padding-hepsi {
+    padding: var(--boyut-padding-orta);
+}
+
+.gecis-smooth {
+    transition: all var(--gecis-normal) ease;
+}
+
+/* Animasyonlar */
+@keyframes sayfaGelsin {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes titresin {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes sokusin {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.sayfa-gelsin {
+    animation: sayfaGelsin var(--gecis-yavas) ease-out;
+}
+
+.titresin {
+    animation: titresin 0.6s ease-out;
+}
+
+.sokusin {
+    animation: sokusin var(--gecis-normal) ease-out;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--boyut-padding-orta);
+}
+
+/* Grid Sistemi */
+.satir {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--boyut-padding-orta);
+}
+
+/* Card Tasarımı */
+.kart {
+    background: var(--renk-arka-beyaz);
+    border-radius: 8px;
+    padding: var(--boyut-padding-orta);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all var(--gecis-normal) ease;
+}
+
+.kart:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+}
+
+/* Alert Stil */
+.uyari, .bildirim {
+    padding: var(--boyut-padding-orta);
+    border-radius: 4px;
+    margin-bottom: var(--boyut-padding-orta);
+    font-size: 14px;
+}
+
+.uyari-bilgi {
+    background: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+}
+
+.uyari-basarili {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.uyari-hata {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.uyari-uyari {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+}
+
+/* Loader */
+.yuklenme {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(102, 126, 234, 0.3);
+    border-top-color: var(--renk-ana);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Print Stilleri */
+@media print {
+    body {
+        background: white;
+    }
+
+    .gizle-yazici {
+        display: none;
+    }
+}

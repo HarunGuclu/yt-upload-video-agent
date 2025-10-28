@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Başarılı - YouTube Video Yükleme</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stil.css') }}">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .basarili-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 50px 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .basarili-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 0.6s ease-out;
+        }
+
+        h1 {
+            color: #27ae60;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .mesaj {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .kullanici-bilgisi {
+            background: #e8f8f5;
+            border: 2px solid #27ae60;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            color: #27ae60;
+        }
+
+        .kullanici-etiketi {
+            font-size: 12px;
+            color: #16a085;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .kullanici-adi {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .devam-butonu {
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        .devam-butonu:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .cikis-butonu {
+            background: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .cikis-butonu:hover {
+            background: #c0392b;
+        }
+
+        .ozellikleri {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .ozellikleri h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .ozellik {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .ozellik-icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="basarili-container">
+        <div class="basarili-icon">✅</div>
+        <h1>Giriş Başarılı!</h1>
+        <p class="mesaj">Giriş başarılı, sonraki aşamaya geçebilirsiniz.</p>
+
+        <div class="kullanici-bilgisi">
+            <div class="kullanici-etiketi">👤 Giriş Yapan Hesap:</div>
+            <div class="kullanici-adi">{{ kullanici_adi }}</div>
+        </div>
+
+        <button class="devam-butonu" onclick="location.href='{{ url_for('video_yukle') }}'">
+            ➜ Video Yükle Sayfasına Git
+        </button>
+
+        <button class="cikis-butonu" onclick="location.href='{{ url_for('cikis') }}'">
+            Çıkış Yap
+        </button>
+
+        <div class="ozellikleri">
+            <h3>✨ Sonraki Adımda Yapabilecekleriniz:</h3>
+            <div class="ozellik">
+                <span class="ozellik-icon">📹</span>
+                <span>Video dosyası seçme (sürükle-bırak desteği)</span>
+            </div>
+            <div class="ozellik">
+                <span class="ozellik-icon">📝</span>
+                <span>Video başlığı ve açıklama ekleme</span>
+            </div>
+            <div class="ozellik">
+                <span class="ozellik-icon">🏷️</span>
+                <span>Video etiketleri ekleme</span>
+            </div>
+            <div class="ozellik">
+                <span class="ozellik-icon">⬆️</span>
+                <span>YouTube kanalınıza otomatik olarak yükleme</span>
+            </div>
+            <div class="ozellik">
+                <span class="ozellik-icon">🔗</span>
+                <span>Yüklenen video linkini alma</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

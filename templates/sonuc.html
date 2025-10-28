@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yükleme Başarılı - YouTube Video Yükleme Sistemi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+
+        .sonuc-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 50px 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .basarili-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 0.6s ease-out;
+        }
+
+        h1 {
+            color: #27ae60;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .mesaj {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .video-bilgisi {
+            background: #e8f4f8;
+            border: 2px solid #00bcd4;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .bilgi-satiri {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #b3e5fc;
+        }
+
+        .bilgi-satiri:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .bilgi-etiketi {
+            font-size: 12px;
+            color: #00695c;
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .bilgi-degeri {
+            font-size: 16px;
+            color: #00897b;
+            word-break: break-all;
+            font-weight: 500;
+        }
+
+        .bilgi-degeri a {
+            color: #00897b;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #00897b;
+        }
+
+        .bilgi-degeri a:hover {
+            color: #004d40;
+            border-bottom-color: #004d40;
+        }
+
+        .buton-grubu {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .butonu {
+            flex: 1;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .youtube-git {
+            background: #ff0000;
+            color: white;
+        }
+
+        .youtube-git:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+        }
+
+        .yeni-yukle {
+            background: #667eea;
+            color: white;
+        }
+
+        .yeni-yukle:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .sozlesmeler {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .sozlesmeler a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .sozlesmeler a:hover {
+            text-decoration: underline;
+        }
+
+        .komut {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #333;
+            margin-top: 10px;
+            word-break: break-all;
+        }
+
+        .kopya-butonu {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .kopya-butonu:hover {
+            background: #2980b9;
+        }
+
+        @media (max-width: 600px) {
+            .sonuc-container {
+                padding: 30px 20px;
+            }
+
+            .buton-grubu {
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .basarili-icon {
+                font-size: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sonuc-container">
+        <div class="basarili-icon">✅</div>
+        <h1>Video Yükleme Başarılı!</h1>
+        <p class="mesaj">
+            Videonuz başarıyla YouTube kanalınıza yüklenmiştir.
+            Aşağıda video bilgilerinizi bulabilirsiniz.
+        </p>
+
+        <div class="video-bilgisi" id="video-bilgisi">
+            <div class="bilgi-satiri">
+                <div class="bilgi-etiketi">🎬 Video ID</div>
+                <div class="bilgi-degeri" id="video-id-bilgi"></div>
+            </div>
+            <div class="bilgi-satiri">
+                <div class="bilgi-etiketi">🔗 Video Linki</div>
+                <div class="bilgi-degeri">
+                    <a id="video-linki-bilgi" href="#" target="_blank"></a>
+                </div>
+            </div>
+            <div class="bilgi-satiri">
+                <div class="bilgi-etiketi">⏰ Yüklenme Zamanı</div>
+                <div class="bilgi-degeri" id="yuklenme-zamani"></div>
+            </div>
+        </div>
+
+        <div class="buton-grubu">
+            <button class="butonu youtube-git" onclick="openYouTube()">
+                ▶️ YouTube'da Aç
+            </button>
+            <button class="butonu yeni-yukle" onclick="uploadAnother()">
+                ➕ Yeni Video Yükle
+            </button>
+        </div>
+
+        <div class="sozlesmeler">
+            <a href="{{ url_for('cikis') }}">Çıkış Yap</a> |
+            <a href="{{ url_for('gizlilik') }}">Gizlilik Politikası</a>
+        </div>
+    </div>
+
+    <script>
+        // Sonuç verileri (sayfanın yüklenmesiyle birlikte iletilecek)
+        const videoVerileri = {
+            video_id: sessionStorage.getItem('video_id') || 'Bilgi Bulunamadı',
+            video_linki: sessionStorage.getItem('video_linki') || '#'
+        };
+
+        // Sayfayı doldur
+        document.getElementById('video-id-bilgi').textContent = videoVerileri.video_id;
+        document.getElementById('video-linki-bilgi').textContent = videoVerileri.video_linki;
+        document.getElementById('video-linki-bilgi').href = videoVerileri.video_linki;
+        document.getElementById('yuklenme-zamani').textContent = new Date().toLocaleString('tr-TR');
+
+        // YouTube'da aç
+        function openYouTube() {
+            window.open(videoVerileri.video_linki, '_blank');
+        }
+
+        // Yeni video yükle
+        function uploadAnother() {
+            sessionStorage.clear();
+            window.location.href = "{{ url_for('video_yukle') }}";
+        }
+    </script>
+</body>
+</html>

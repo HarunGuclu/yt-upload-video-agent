@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gizlilik Politikası - YouTube Video Yükleme Sistemi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            color: #666;
+            margin-left: 20px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .geri-donme {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .geri-butonu {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .geri-butonu:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Gizlilik Politikası</h1>
+
+        <h2>1. Amaç</h2>
+        <p>
+            Bu gizlilik politikası, YouTube Video Yükleme Sistemi ("Hizmet" olarak adlandırılır)
+            tarafından toplanan, kullanılan ve korunan kişisel verileri açıklamaktadır.
+        </p>
+
+        <h2>2. Toplanan Veriler</h2>
+        <p>Hizmetimizi kullanırken aşağıdaki verileri toplayabiliriz:</p>
+        <ul>
+            <li>Google Hesap Bilgileri: Adınız, e-posta adresiniz ve profil resminiz</li>
+            <li>YouTube Kanalı Bilgileri: Kanalınızın adı ve ID'si</li>
+            <li>Video Metadata'sı: Başlık, açıklama, etiketler ve gizlilik ayarları</li>
+            <li>Teknik Bilgiler: IP adresiniz, tarayıcı türü ve kullanım istatistikleri</li>
+        </ul>
+
+        <h2>3. Verilerin Kullanımı</h2>
+        <p>Toplanan veriler yalnızca aşağıdaki amaçlarla kullanılır:</p>
+        <ul>
+            <li>Hizmetin sağlanması ve iyileştirilmesi</li>
+            <li>Google OAuth 2.0 aracılığıyla kimlik doğrulama</li>
+            <li>YouTube API'si aracılığıyla video yükleme</li>
+            <li>Kullanıcı deneyiminin iyileştirilmesi</li>
+            <li>Hizmetin güvenliğinin sağlanması</li>
+        </ul>
+
+        <h2>4. Veri Güvenliği</h2>
+        <p>
+            Verilerinizin güvenliğini ciddiye alıyoruz. Verilerinizi korumak için:
+        </p>
+        <ul>
+            <li>HTTPS şifrelemeleri kullanıyoruz</li>
+            <li>Hassas bilgileri .env dosyasında güvenle saklıyoruz</li>
+            <li>Session verileri güvenli bir şekilde yönetilir</li>
+            <li>Üçüncü taraflarla veri paylaşmıyoruz</li>
+        </ul>
+
+        <h2>5. Google OAuth 2.0</h2>
+        <p>
+            Hizmetimiz Google OAuth 2.0 kullanarak kimlik doğrulaması sağlar.
+            Bu, Google'ın gizlilik politikasına da tabidir. Google hesabınızla giriş yaptığınızda,
+            Google'ın gizlilik politikasını kabul etmiş olursunuz.
+        </p>
+
+        <h2>6. Çerezler</h2>
+        <p>
+            Hizmetimiz, oturumunuzu yönetmek için çerezler kullanır.
+            Çerezler, tarayıcı kapandığında silinir.
+        </p>
+
+        <h2>7. Üçüncü Taraf Hizmetleri</h2>
+        <p>
+            Hizmetimiz aşağıdaki üçüncü taraf hizmetlerini kullanır:
+        </p>
+        <ul>
+            <li><strong>Google:</strong> OAuth 2.0 ve YouTube API'si için</li>
+            <li><strong>Flask:</strong> Web sunucusu olarak</li>
+        </ul>
+
+        <h2>8. Kullanıcı Hakları</h2>
+        <p>
+            Gizlilik ayarlarınızı istediğiniz zaman yönetebilirsiniz. Hizmetimizi kullanmayı
+            sonlandırmak istediğinizde, çıkış yapabilir ve tüm verileriniz silinecektir.
+        </p>
+
+        <h2>9. İletişim</h2>
+        <p>
+            Bu gizlilik politikası hakkında sorularınız varsa, lütfen bizimle iletişime geçin.
+        </p>
+
+        <h2>10. Değişiklikleri</h2>
+        <p>
+            Bu gizlilik politikasını herhangi bir zamanda güncelleyebiliriz.
+            Değişiklikler bu sayfada yayınlandıktan sonra yürürlüğe girer.
+        </p>
+
+        <div class="geri-donme">
+            <a href="{{ url_for('giris') }}" class="geri-butonu">← Geri Dön</a>
+        </div>
+    </div>
+</body>
+</html>

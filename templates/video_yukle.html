@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Yükleme - YouTube Video Yükleme Sistemi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stil.css') }}">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .cikis-link {
+            color: #e74c3c;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 16px;
+            border: 1px solid #e74c3c;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .cikis-link:hover {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .drop-zone {
+            border: 3px dashed #667eea;
+            border-radius: 8px;
+            padding: 60px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9ff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .drop-zone:hover {
+            background: #f0f2ff;
+            border-color: #764ba2;
+            transform: scale(1.02);
+        }
+
+        .drop-zone.dragover {
+            background: #e8ecff;
+            border-color: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .drop-zone-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .drop-zone-text {
+            color: #667eea;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .drop-zone-hint {
+            color: #999;
+            font-size: 13px;
+        }
+
+        #video_dosyasi {
+            display: none;
+        }
+
+        .dosya-bilgisi {
+            background: #e8f4f8;
+            border-left: 4px solid #00bcd4;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .dosya-bilgisi.gosterilsin {
+            display: block;
+        }
+
+        .dosya-adi {
+            font-weight: 600;
+            color: #00695c;
+            margin-bottom: 5px;
+        }
+
+        .dosya-boyutu {
+            font-size: 13px;
+            color: #00897b;
+        }
+
+        .input-alan {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .input-alan:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea.input-alan {
+            resize: vertical;
+            min-height: 100px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .zorunlu-isareti {
+            color: #e74c3c;
+        }
+
+        .isteğe-bagli {
+            color: #999;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        .buton-grubu {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .yukle-butonu {
+            background: #27ae60;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .yukle-butonu:hover:not(:disabled) {
+            background: #229954;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+        }
+
+        .yukle-butonu:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .iptal-butonu {
+            background: #e74c3c;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .iptal-butonu:hover {
+            background: #c0392b;
+        }
+
+        .yeni-dosya-sec {
+            padding: 12px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .yeni-dosya-sec:hover {
+            background: #2980b9;
+        }
+
+        .ilerleme-cubugu {
+            width: 100%;
+            height: 6px;
+            background: #ecf0f1;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .ilerleme-cubugu.gosterilsin {
+            display: block;
+        }
+
+        .ilerleme-barı {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .durum-mesaji {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .durum-mesaji.gosterilsin {
+            display: block;
+        }
+
+        .durum-mesaji.basarili {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+
+        .durum-mesaji.hata {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+
+        .durum-mesaji.bilgi {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+
+        .baslangic-mesaji {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            color: #856404;
+            font-size: 13px;
+        }
+
+        .iki-sutun {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .iki-sutun {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .drop-zone {
+                padding: 40px 15px;
+            }
+
+            .buton-grubu {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📹 Video Yükleme</h1>
+            <a href="{{ url_for('cikis') }}" class="cikis-link">Çıkış Yap</a>
+        </div>
+
+        <div class="form-container">
+            <div class="baslangic-mesaji">
+                📌 <strong>İpucu:</strong> Video dosyasını aşağı sürükleyerek bırakabilir veya tıklayarak seçebilirsiniz.
+                Dosya seçtikten sonra başlık ve açıklamayı ekleyerek yükleme işlemini başlatın.
+            </div>
+
+            <form id="yukle-formu" action="{{ url_for('dosyayı_yukle') }}" method="POST"  enctype="multipart/form-data">
+                <!-- Video Dosyası Seçimi -->
+                <div class="form-group">
+                    <label>
+                        Video Dosyası <span class="zorunlu-isareti">*</span>
+                    </label>
+                    <div class="drop-zone" id="drop-zone">
+                        <div class="drop-zone-icon">⬇️</div>
+                        <div class="drop-zone-text">Video Dosyanızı Buraya Sürükleyin</div>
+                        <div class="drop-zone-hint">veya tıklayarak seçin</div>
+                    </div>
+                    <input type="file" id="video_dosyasi" name="video_dosyasi" accept="video/*">
+
+                    <div class="dosya-bilgisi" id="dosya-bilgisi">
+                        <div class="dosya-adi" id="dosya-adi-goster"></div>
+                        <div class="dosya-boyutu" id="dosya-boyutu-goster"></div>
+                        <button type="button" class="yeni-dosya-sec" onclick="document.getElementById('video_dosyasi').click();">
+                            🔄 Farklı Dosya Seç
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Video Başlığı -->
+                <div class="iki-sutun">
+                    <div class="form-group">
+                        <label>
+                            Video Başlığı <span class="isteğe-bagli">(isteğe bağlı)</span>
+                        </label>
+                        <input type="text" id="video_baslik" name="video_baslik" class="input-alan"
+                               placeholder="Örn: Harika Yolculuğum" maxlength="100">
+                        <small style="color: #999; display: block; margin-top: 5px;">En fazla 100 karakter</small>
+                    </div>
+
+                    <!-- Video Etiketleri -->
+                    <div class="form-group">
+                        <label>
+                            Video Etiketleri <span class="isteğe-bagli">(isteğe bağlı)</span>
+                        </label>
+                        <input type="text" id="video_taglari" name="video_taglari" class="input-alan"
+                               placeholder="Örn: seyahat, vlog, eğlence">
+                        <small style="color: #999; display: block; margin-top: 5px;">Virgülle ayırarak ekleyin</small>
+                    </div>
+                </div>
+
+                <!-- Video Açıklaması -->
+                <div class="form-group">
+                    <label>
+                        Video Açıklaması <span class="isteğe-bagli">(isteğe bağlı)</span>
+                    </label>
+                    <textarea id="video_aciklamasi" name="video_aciklamasi" class="input-alan"
+                              placeholder="Bu videoyu nasıl buldum, bu videonun konusu nedir vs... Açıklamanızı yazabilirsiniz."></textarea>
+                </div>
+
+                <!-- İlerleme Çubuğu -->
+                <div class="ilerleme-cubugu" id="ilerleme-cubugu">
+                    <div class="ilerleme-barı" id="ilerleme-barı"></div>
+                </div>
+
+                <!-- Durum Mesajı -->
+                <div class="durum-mesaji" id="durum-mesaji"></div>
+
+                <!-- Butonlar -->
+                <div class="buton-grubu">
+                    <button type="submit" class="yukle-butonu" id="yukle-btn">
+                        ⬆️ Yükle
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const uploadUrl = "{{ url_for('dosyayı_yukle') }}";
+        const sonucUrl = "{{ url_for('sonuc') }}";
+        console.log('Sonuç URL:', sonucUrl); // Debug için
+    </script>
+    <script src="{{ url_for('static', filename='js/yukle.js') }}"></script>
+    
+</body>
+</html>
