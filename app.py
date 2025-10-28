@@ -15,6 +15,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
+import cv2
 
 # .env dosyasından ortam değişkenlerini yükle
 load_dotenv()
@@ -69,12 +70,119 @@ def oauth_akisi_olustur():
     )
 
 
+def video_formatini_analiz_et(dosya_yolu):
+    """
+    Video dosyasının formatını analiz et.
+
+    Shorts kriterleri:
+    - Video süresi: 60 saniye veya daha kısa
+    - En-boy oranı: 9:16 (dikey format)
+
+    Args:
+        dosya_yolu (str): Video dosyasının yolu
+
+    Returns:
+        dict: {
+            'format': 'shorts' veya 'normal',
+            'sürü': int (saniye cinsinden),
+            'genişlik': int,
+            'yükseklik': int,
+            'en_boy_oranı': float,
+            'uyarı': str (opsiyonel)
+        }
+    """
+    try:
+        cap = cv2.VideoCapture(dosya_yolu)
+
+        if not cap.isOpened():
+            return {
+                'format': 'normal',
+                'hata': 'Video dosyası açılamadı',
+                'uyarı': 'Video bilgileri alınamadı, normal video olarak kaydedilecek'
+            }
+
+        # Video bilgilerini al
+        genişlik = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        yükseklik = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        toplam_frame = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
+        cap.release()
+
+        # Sürü hesapla
+        if fps > 0:
+            sure_saniye = toplam_frame / fps
+        else:
+            sure_saniye = 0
+
+        # En-boy oranını hesapla
+        if yükseklik > 0:
+            en_boy_oranı = genişlik / yükseklik
+        else:
+            en_boy_oranı = 1.0
+
+        # Shorts kriterleri: 60 saniye veya daha kısa ve dikey format (9:16)
+        is_short_duration = sure_saniye <= 60  # 60 saniye veya daha kısa
+        is_vertical = en_boy_oranı < 1.0  # Dikey format (genişlik < yükseklik)
+
+        # Shorts olup olmadığını belirle
+        if is_short_duration and is_vertical:
+            format_tipi = 'shorts'
+        else:
+            format_tipi = 'normal'
+
+        result = {
+            'format': format_tipi,
+            'sürü': int(sure_saniye),
+            'genişlik': genişlik,
+            'yükseklik': yükseklik,
+            'en_boy_oranı': round(en_boy_oranı, 2),
+            'is_short_duration': is_short_duration,
+            'is_vertical': is_vertical
+        }
+
+        # Uyarı mesajları ekle
+        if not is_short_duration:
+            result['uyari'] = f'⚠️ Video {int(sure_saniye)} saniye. Shorts için 60 saniye veya daha kısa olmalı.'
+        elif not is_vertical:
+            result['uyari'] = f'⚠️ Video yatay formatta ({en_boy_oranı}:1). Shorts için dikey format (9:16) önerilir.'
+        else:
+            result['notu'] = '✅ Bu video Shorts kriterleri karşılıyor!'
+
+        return result
+
+    except Exception as e:
+        return {
+            'format': 'normal',
+            'hata': str(e),
+            'uyarı': 'Video bilgileri alınamadı, normal video olarak kaydedilecek'
+        }
+
+
 @app.route('/')
 def index():
     """Ana sayfa - oturum durumuna göre yönlendir"""
     if 'credentials' in session:
         return redirect(url_for('video_yukle'))
     return redirect(url_for('giris'))
+
+
+@app.before_request
+def oturum_kontrol_et():
+    """
+    Her request öncesinde oturum kontrolü yap.
+    Korumalı sayfalar için giriş kontrolü gerçekleştir.
+    """
+    korumasiz_rotalar = {'giris', 'callback', 'gizlilik', 'static'}
+    endpoint = request.endpoint
+
+    # Static dosyalar ve korumasız sayfalar için kontrol yapma
+    if endpoint and endpoint.split('.')[0] in korumasiz_rotalar:
+        return None
+
+    # Diğer sayfalar için oturum kontrolü
+    if endpoint and endpoint not in korumasiz_rotalar and 'credentials' not in session:
+        return redirect(url_for('giris'))
 
 
 @app.route('/giris', methods=['GET', 'POST'])
@@ -172,6 +280,8 @@ def dosyayı_yukle():
         - video_baslik: Video başlığı (isteğe bağlı)
         - video_aciklamasi: Video açıklaması (isteğe bağlı)
         - video_taglari: Video etiketleri (isteğe bağlı)
+        - gizlilik_secenegi: Gizlilik durumu (public, unlisted, private)
+        - video_tipi: Video tipi (normal, shorts)
 
     Returns:
         JSON: Yükleme sonucu ve video ID'si
@@ -200,10 +310,29 @@ def dosyayı_yukle():
         # Dosyayı kaydet
         video_dosyasi.save(dosya_yolu)
 
+        # Video formatını analiz et
+        video_analiz = video_formatini_analiz_et(dosya_yolu)
+
         # Video bilgilerini al
         video_baslik = request.form.get('video_baslik', 'Başlık Girilmedi')
         video_aciklamasi = request.form.get('video_aciklamasi', 'Açıklama girilmedi')
         video_taglari = request.form.get('video_taglari', '')
+        gizlilik_secenegi = request.form.get('gizlilik_secenegi', 'public')
+
+        # Kullanıcı tarafından seçilen video tipi
+        kullanici_video_tipi = request.form.get('video_tipi', 'normal')
+
+        # Eğer kullanıcı otomatik seçim istiyorsa, analiz sonucunu kullan
+        # Aksi takdirde kullanıcı seçimini kullan
+        if kullanici_video_tipi == 'auto':
+            video_tipi = video_analiz.get('format', 'normal')
+        else:
+            video_tipi = kullanici_video_tipi
+
+        # Gizlilik seçeneğini doğrula
+        izin_verilen_gizlilik = {'public', 'unlisted', 'private'}
+        if gizlilik_secenegi not in izin_verilen_gizlilik:
+            gizlilik_secenegi = 'public'
 
         # Etiketleri diziye dönüştür
         tag_listesi = [tag.strip() for tag in video_taglari.split(',') if tag.strip()] if video_taglari else []
@@ -226,7 +355,7 @@ def dosyayı_yukle():
                 'categoryId': '22'  # Varsayılan kategori: Diğer
             },
             'status': {
-                'privacyStatus': 'public'  # Varsayılan olarak özel
+                'privacyStatus': gizlilik_secenegi
             }
         }
 
@@ -267,7 +396,10 @@ def dosyayı_yukle():
         return jsonify({
             'basarili': True,
             'video_id': video_id,
-            'video_linki': f'https://www.youtube.com/watch?v={video_id}'
+            'video_linki': f'https://www.youtube.com/watch?v={video_id}',
+            'video_tipi': video_tipi,
+            'gizlilik': gizlilik_secenegi,
+            'video_analiz': video_analiz
         })
 
     except Exception as e:

@@ -2,15 +2,20 @@
 
 Python Flask tabanlı, Google OAuth 2.0 ile entegre bir YouTube video yükleme uygulaması.
 
+**Available in:** [English](#-youtube-video-upload-system) | [Türkçe](#-youtube-video-yükleme-sistemi)
+
 ## 📋 Özellikler
 
 ✅ **Google OAuth 2.0 Kimlik Doğrulaması** - Güvenli Google hesabı entegrasyonu
 ✅ **YouTube Data API v3 Entegrasyonu** - Direkt YouTube kanalına video yükleme
 ✅ **Sürükle-Bırak Desteği** - Dosya seçimi için kolay drag-and-drop arayüzü
 ✅ **Video Metadata** - Başlık, açıklama ve etiketler ekleme
+✅ **Video Gizlilik Seçenekleri** - Public, Unlisted, Private yükleme seçenekleri
+✅ **Shorts Desteği** - Otomatik YouTube Shorts algılaması (60 saniye, dikey format)
+✅ **Video Format Analizi** - Otomatik video çözünürlük, süre ve en-boy oranı tespiti
 ✅ **İlerleme Takibi** - Yükleme ilerleme çubuğu
 ✅ **Dosya Doğrulaması** - Dosya türü ve boyut kontrolü
-✅ **Güvenli Oturum Yönetimi** - Session tabanlı kimlik doğrulama
+✅ **Güvenli Oturum Yönetimi** - Session tabanlı kimlik doğrulama, zorunlu yeniden giriş
 ✅ **Türkçe Arayüz** - Tüm metin ve arayüz Türkçe
 
 ## 🛠️ Teknik Gereksinimler
@@ -18,6 +23,7 @@ Python Flask tabanlı, Google OAuth 2.0 ile entegre bir YouTube video yükleme u
 - **Python:** 3.8+
 - **Web Framework:** Flask 2.3+
 - **Google Kütüphaneleri:** google-auth, google-auth-oauthlib, google-api-python-client
+- **Video İşleme:** opencv-python, ffmpeg-python
 - **Diğer:** python-dotenv
 
 ## 📁 Proje Yapısı
@@ -130,12 +136,37 @@ http://localhost:5000
 2. **Video Etiketleri** (isteğe bağlı): Virgülle ayrılmış etiketler
 3. **Video Açıklaması** (isteğe bağlı): Detaylı açıklama yazın
 
-### Adım 4: Yükleyin
+### Adım 4: Video Gizlilik Durumunu Seçin
+
+Videonuzun kime görüneceğini belirleyin:
+
+- 🌐 **Herkese Açık (Public)**: Video herkesin görebilmesi için açık olur
+- 🔗 **Liste Dışı (Unlisted)**: Yalnızca linki olanlar görebilir
+- 🔒 **Özel (Private)**: Yalnızca sen ve davet ettiğin kişiler görebilir
+
+### Adım 5: Video Türünü Seçin
+
+Videonuzun formatını belirleyin:
+
+- 🤖 **Otomatik Seçim** (Önerilen): Sistem videonuzun özelliklerini analiz ederek otomatik seçer
+- 📺 **Normal Video**: Uzun formatlı YouTube videosu (yatay format)
+- ⚡ **YouTube Shorts**: Kısa formatlı video (60 saniye ve altı, dikey format)
+
+**Shorts Kriterleri:**
+- Video süresi: 60 saniye veya daha kısa
+- Video formatı: Dikey (9:16 en-boy oranı)
+
+### Adım 6: Yükleyin
 
 1. "Yükle" düğmesine tıklayın
 2. Yükleme ilerleme çubuğunu izleyin
-3. Yükleme tamamlandığında başarı mesajı göreceksiniz
-4. Video bağlantısını alabilirsiniz
+3. Yükleme tamamlandığında:
+   - Video ID'si
+   - Video linki
+   - Video tipi (Shorts/Normal)
+   - Gizlilik durumu
+   - Video analiz bilgileri (çözünürlük, süre, en-boy oranı)
+4. "YouTube'da Aç" düğmesiyle hemen videonuza gidebilirsiniz
 
 ## 🔐 Güvenlik Özellikleri
 
@@ -194,6 +225,8 @@ google-auth-httplib2==0.1.1
 google-api-python-client==2.91.0
 python-dotenv==1.0.0
 Werkzeug==2.3.6
+opencv-python==4.8.1.78
+ffmpeg-python==0.2.1
 ```
 
 ## 🌐 Production Ortamı

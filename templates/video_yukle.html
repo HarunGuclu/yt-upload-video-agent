@@ -298,6 +298,76 @@
             gap: 30px;
         }
 
+        .gizlilik-secenekleri,
+        .video-tipi-secenekleri {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .gizlilik-option,
+        .video-tipi-option {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .gizlilik-option:hover,
+        .video-tipi-option:hover {
+            border-color: #667eea;
+            background: #f5f7ff;
+        }
+
+        .gizlilik-option input[type="radio"],
+        .video-tipi-option input[type="radio"] {
+            margin-right: 15px;
+            margin-top: 2px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .gizlilik-option input[type="radio"]:checked + .gizlilik-label,
+        .video-tipi-option input[type="radio"]:checked + .video-tipi-label {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .gizlilik-option input[type="radio"]:checked,
+        .video-tipi-option input[type="radio"]:checked {
+            accent-color: #667eea;
+        }
+
+        .gizlilik-label,
+        .video-tipi-label {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .gizlilik-label strong,
+        .video-tipi-label strong {
+            color: #333;
+            font-size: 15px;
+        }
+
+        .gizlilik-label small,
+        .video-tipi-label small {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .gizlilik-option input[type="radio"]:checked + .gizlilik-label strong,
+        .video-tipi-option input[type="radio"]:checked + .video-tipi-label strong {
+            color: #667eea;
+        }
+
         @media (max-width: 768px) {
             .iki-sutun {
                 grid-template-columns: 1fr;
@@ -386,6 +456,66 @@
                     </label>
                     <textarea id="video_aciklamasi" name="video_aciklamasi" class="input-alan"
                               placeholder="Bu videoyu nasıl buldum, bu videonun konusu nedir vs... Açıklamanızı yazabilirsiniz."></textarea>
+                </div>
+
+                <!-- Video Gizlilik Seçeneği -->
+                <div class="form-group">
+                    <label>
+                        Video Gizlilik Durumu <span class="isteğe-bagli">(isteğe bağlı)</span>
+                    </label>
+                    <div class="gizlilik-secenekleri">
+                        <label class="gizlilik-option">
+                            <input type="radio" name="gizlilik_secenegi" value="public" checked>
+                            <span class="gizlilik-label">
+                                🌐 <strong>Herkese Açık</strong>
+                                <small>Video herkesin görebilmesi için açık olur</small>
+                            </span>
+                        </label>
+                        <label class="gizlilik-option">
+                            <input type="radio" name="gizlilik_secenegi" value="unlisted">
+                            <span class="gizlilik-label">
+                                🔗 <strong>Liste Dışı</strong>
+                                <small>Yalnızca linki olanlar görebilir</small>
+                            </span>
+                        </label>
+                        <label class="gizlilik-option">
+                            <input type="radio" name="gizlilik_secenegi" value="private">
+                            <span class="gizlilik-label">
+                                🔒 <strong>Özel</strong>
+                                <small>Yalnızca sen ve davet ettiğin kişiler görebilir</small>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Video Tipi Seçeneği -->
+                <div class="form-group">
+                    <label>
+                        Video Tipi <span class="isteğe-bagli">(isteğe bağlı)</span>
+                    </label>
+                    <div class="video-tipi-secenekleri">
+                        <label class="video-tipi-option">
+                            <input type="radio" name="video_tipi" value="auto" checked>
+                            <span class="video-tipi-label">
+                                🤖 <strong>Otomatik Seçim</strong>
+                                <small>Video formatını otomatik olarak analiz ederek seçer</small>
+                            </span>
+                        </label>
+                        <label class="video-tipi-option">
+                            <input type="radio" name="video_tipi" value="normal">
+                            <span class="video-tipi-label">
+                                📺 <strong>Normal Video</strong>
+                                <small>Uzun formatlı YouTube videosu (yatay format)</small>
+                            </span>
+                        </label>
+                        <label class="video-tipi-option">
+                            <input type="radio" name="video_tipi" value="shorts">
+                            <span class="video-tipi-label">
+                                ⚡ <strong>YouTube Shorts</strong>
+                                <small>Kısa formatlı video (60 saniye ve altı, dikey format)</small>
+                            </span>
+                        </label>
+                    </div>
                 </div>
 
                 <!-- İlerleme Çubuğu -->

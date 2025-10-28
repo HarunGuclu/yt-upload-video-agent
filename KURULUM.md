@@ -112,6 +112,8 @@ Kurulum sırasında aşağıdakiler yüklenecek:
 - google-auth-oauthlib: OAuth 2.0 desteği
 - google-api-python-client: YouTube API istemcisi
 - python-dotenv: Ortam değişkenleri
+- opencv-python: Video işleme ve analiz
+- ffmpeg-python: FFmpeg Python arayüzü
 
 ## ⚙️ ADIM 3: Ortam Değişkenlerini Ayarlama
 

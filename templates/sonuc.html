@@ -242,8 +242,22 @@
                 </div>
             </div>
             <div class="bilgi-satiri">
+                <div class="bilgi-etiketi">📺 Video Tipi</div>
+                <div class="bilgi-degeri" id="video-tipi-bilgi"></div>
+            </div>
+            <div class="bilgi-satiri">
+                <div class="bilgi-etiketi">🔐 Gizlilik Durumu</div>
+                <div class="bilgi-degeri" id="gizlilik-bilgi"></div>
+            </div>
+            <div class="bilgi-satiri">
                 <div class="bilgi-etiketi">⏰ Yüklenme Zamanı</div>
                 <div class="bilgi-degeri" id="yuklenme-zamani"></div>
+            </div>
+            <div class="bilgi-satiri" id="video-analiz-satiri" style="display: none;">
+                <div class="bilgi-etiketi">📊 Video Analizi</div>
+                <div class="bilgi-degeri">
+                    <div id="video-analiz-bilgi"></div>
+                </div>
             </div>
         </div>
 
@@ -266,14 +280,60 @@
         // Sonuç verileri (sayfanın yüklenmesiyle birlikte iletilecek)
         const videoVerileri = {
             video_id: sessionStorage.getItem('video_id') || 'Bilgi Bulunamadı',
-            video_linki: sessionStorage.getItem('video_linki') || '#'
+            video_linki: sessionStorage.getItem('video_linki') || '#',
+            video_tipi: sessionStorage.getItem('video_tipi') || 'Bilinmiyor',
+            gizlilik: sessionStorage.getItem('gizlilik') || 'Bilinmiyor',
+            video_analiz: sessionStorage.getItem('video_analiz') ? JSON.parse(sessionStorage.getItem('video_analiz')) : null
         };
+
+        // Gizlilik durumunu türkçeleştir
+        function gizlilikTurkce(status) {
+            const ceviriler = {
+                'public': '🌐 Herkese Açık',
+                'unlisted': '🔗 Liste Dışı',
+                'private': '🔒 Özel'
+            };
+            return ceviriler[status] || status;
+        }
+
+        // Video tipini türkçeleştir
+        function videoTipiTurkce(tip) {
+            const ceviriler = {
+                'shorts': '⚡ YouTube Shorts',
+                'normal': '📺 Normal Video'
+            };
+            return ceviriler[tip] || tip;
+        }
 
         // Sayfayı doldur
         document.getElementById('video-id-bilgi').textContent = videoVerileri.video_id;
         document.getElementById('video-linki-bilgi').textContent = videoVerileri.video_linki;
         document.getElementById('video-linki-bilgi').href = videoVerileri.video_linki;
+        document.getElementById('video-tipi-bilgi').textContent = videoTipiTurkce(videoVerileri.video_tipi);
+        document.getElementById('gizlilik-bilgi').textContent = gizlilikTurkce(videoVerileri.gizlilik);
         document.getElementById('yuklenme-zamani').textContent = new Date().toLocaleString('tr-TR');
+
+        // Video analiz bilgilerini göster
+        if (videoVerileri.video_analiz) {
+            const analiz = videoVerileri.video_analiz;
+            const analizDiv = document.getElementById('video-analiz-bilgi');
+            const satir = document.getElementById('video-analiz-satiri');
+
+            let analizHTML = '';
+            analizHTML += `<div style="margin-bottom: 8px;">📏 <strong>Çözünürlük:</strong> ${analiz.genişlik}×${analiz.yükseklik}px</div>`;
+            analizHTML += `<div style="margin-bottom: 8px;">⏱️ <strong>Süre:</strong> ${analiz.sürü} saniye</div>`;
+            analizHTML += `<div style="margin-bottom: 8px;">📐 <strong>En-boy Oranı:</strong> ${analiz.en_boy_oranı}:1</div>`;
+
+            if (analiz.uyari) {
+                analizHTML += `<div style="margin-top: 10px; padding: 8px; background: #fff3cd; border-radius: 4px; font-size: 13px;">${analiz.uyari}</div>`;
+            }
+            if (analiz.notu) {
+                analizHTML += `<div style="margin-top: 10px; padding: 8px; background: #d4edda; border-radius: 4px; font-size: 13px;">${analiz.notu}</div>`;
+            }
+
+            analizDiv.innerHTML = analizHTML;
+            satir.style.display = 'block';
+        }
 
         // YouTube'da aç
         function openYouTube() {

@@ -152,6 +152,8 @@ formSunu.addEventListener('submit', async (e) => {
         formData.append('video_baslik', document.getElementById('video_baslik').value);
         formData.append('video_aciklamasi', document.getElementById('video_aciklamasi').value);
         formData.append('video_taglari', document.getElementById('video_taglari').value);
+        formData.append('gizlilik_secenegi', document.querySelector('input[name="gizlilik_secenegi"]:checked').value);
+        formData.append('video_tipi', document.querySelector('input[name="video_tipi"]:checked').value);
 
         // İlerleme takibi için XMLHttpRequest kullan
         const xhr = new XMLHttpRequest();
@@ -179,6 +181,11 @@ formSunu.addEventListener('submit', async (e) => {
                         // Session Storage'a video bilgilerini kaydet
                         sessionStorage.setItem('video_id', sonuc.video_id);
                         sessionStorage.setItem('video_linki', sonuc.video_linki);
+                        sessionStorage.setItem('video_tipi', sonuc.video_tipi);
+                        sessionStorage.setItem('gizlilik', sonuc.gizlilik);
+                        if (sonuc.video_analiz) {
+                            sessionStorage.setItem('video_analiz', JSON.stringify(sonuc.video_analiz));
+                        }
 
                         // İlerleme çubuğunu %100 yap
                         iletisimGuncelle(100);
