@@ -34,11 +34,16 @@ SCOPES = [
 ]
 
 
-# Uploads klasörü
-UPLOADS_FOLDER = 'uploads'
+# Uploads klasörü - Render için geçici dizin kullan
+import tempfile
+
+if os.getenv('RENDER'):  # Production ortamı (Render)
+    UPLOADS_FOLDER = os.path.join(tempfile.gettempdir(), 'uploads')
+else:  # Local development
+    UPLOADS_FOLDER = 'uploads'
+
 if not os.path.exists(UPLOADS_FOLDER):
     os.makedirs(UPLOADS_FOLDER)
-
 app.config['UPLOAD_FOLDER'] = UPLOADS_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 5000  # 5GB
 
@@ -55,16 +60,32 @@ def kimli_degil_kontrol(f):
         return f(*args, **kwargs)
     return oturumu_kontrol_et
 
-
 def oauth_akisi_olustur():
     """
     Google OAuth 2.0 akışını oluştur.
-
+    
     Returns:
         Flow: Google OAuth flow nesnesi
     """
-    return Flow.from_client_secrets_file(
-        'client_secret.json',
+    # Environment variable'dan client secrets oku
+    client_secrets_json = os.getenv('GOOGLE_CLIENT_SECRETS')
+    
+    if client_secrets_json:
+        # Production (Render) - JSON string'i dict'e çevir
+        try:
+            client_config = json.loads(client_secrets_json)
+        except json.JSONDecodeError:
+            raise ValueError("GOOGLE_CLIENT_SECRETS geçersiz JSON formatında!")
+    else:
+        # Local development - dosyadan oku
+        if not os.path.exists('client_secret.json'):
+            raise FileNotFoundError("client_secret.json bulunamadı!")
+        
+        with open('client_secret.json', 'r') as f:
+            client_config = json.load(f)
+    
+    return Flow.from_client_config(
+        client_config,
         scopes=SCOPES,
         redirect_uri=REDIRECT_URI
     )
@@ -437,8 +458,9 @@ def sunucu_hatasi(e):
     """500 Hata Sayfası"""
     return render_template('hata.html', hata_kodu=500, mesaj='Sunucu hatası'), 500
 
-
 if __name__ == '__main__':
     # Flask uygulamasını çalıştır
     # NOT: Production için Gunicorn veya buna benzer bir WSGI server kullanın
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    PORT = int(os.getenv('PORT', 5000))
+    DEBUG = os.getenv('FLASK_ENV', 'production') != 'production'
+    app.run(debug=DEBUG, host='0.0.0.0', port=PORT)

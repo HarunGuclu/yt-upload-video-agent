@@ -38,7 +38,9 @@ wheels/
 *.swp
 *.swo
 *~
-
+# uploads klasörü ignore edilsin
+uploads/*
+!uploads/.gitkeep
 # Dosya yükleme klasörü
 uploads/
 *.tmp
