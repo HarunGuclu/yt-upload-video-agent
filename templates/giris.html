@@ -7,19 +7,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/stil.css') }}">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0F0F0F;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', 'Arial', sans-serif;
         }
 
         .giris-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            background: #212121;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             padding: 50px 40px;
             max-width: 500px;
             width: 100%;
@@ -44,25 +44,26 @@
         }
 
         h1 {
-            color: #333;
+            color: #FFFFFF;
             margin-bottom: 10px;
             font-size: 28px;
+            font-weight: 500;
         }
 
         .aciklama {
-            color: #666;
+            color: #AAAAAA;
             margin-bottom: 40px;
             font-size: 14px;
             line-height: 1.6;
         }
 
         .google-btn {
-            background: white;
-            border: 2px solid #f0f0f0;
-            color: #333;
+            background: #FFFFFF;
+            border: none;
+            color: #3C4043;
             padding: 15px 30px;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 2px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -72,12 +73,12 @@
             width: 100%;
             box-sizing: border-box;
             margin-bottom: 20px;
+            font-weight: 500;
         }
 
         .google-btn:hover {
-            background: #f8f8f8;
-            border-color: #e0e0e0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            background: #F8F9FA;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .google-icon {
@@ -86,15 +87,19 @@
         }
 
         .uyari {
-            background: #e8f4f8;
-            border-left: 4px solid #00bcd4;
+            background: rgba(62, 166, 255, 0.1);
+            border-left: 4px solid #3EA6FF;
             padding: 15px;
             border-radius: 4px;
             margin-top: 30px;
             text-align: left;
-            color: #00695c;
+            color: #AAAAAA;
             font-size: 13px;
             line-height: 1.6;
+        }
+
+        .uyari strong {
+            color: #3EA6FF;
         }
 
         .adimlar {
@@ -103,20 +108,21 @@
         }
 
         .adimlar h3 {
-            color: #333;
+            color: #FFFFFF;
             margin-bottom: 15px;
             font-size: 14px;
+            font-weight: 500;
         }
 
         .adim {
             display: flex;
             margin-bottom: 12px;
             font-size: 13px;
-            color: #666;
+            color: #AAAAAA;
         }
 
         .adim-no {
-            background: #667eea;
+            background: #FF0000;
             color: white;
             width: 24px;
             height: 24px;
@@ -127,21 +133,22 @@
             margin-right: 10px;
             flex-shrink: 0;
             font-weight: bold;
+            font-size: 12px;
         }
 
         .footer {
             margin-top: 30px;
             font-size: 12px;
-            color: #999;
+            color: #717171;
         }
 
         .footer a {
-            color: #667eea;
+            color: #3EA6FF;
             text-decoration: none;
         }
 
         .footer a:hover {
-            text-decoration: underline;
+            color: #FFFFFF;
         }
     </style>
 </head>

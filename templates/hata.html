@@ -12,19 +12,19 @@
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0F0F0F;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', 'Arial', sans-serif;
             padding: 20px;
         }
 
         .hata-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            background: #212121;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             padding: 50px 40px;
             max-width: 500px;
             width: 100%;
@@ -49,22 +49,23 @@
         }
 
         h1 {
-            color: #e74c3c;
+            color: #FF0000;
             margin-bottom: 10px;
             font-size: 28px;
+            font-weight: 500;
         }
 
         .mesaj {
-            color: #666;
+            color: #AAAAAA;
             margin-bottom: 30px;
             font-size: 16px;
             line-height: 1.6;
         }
 
         .hata-detayi {
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #AAAAAA;
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 30px;
@@ -73,51 +74,59 @@
             word-break: break-word;
         }
 
+        .hata-detayi strong {
+            color: #FF0000;
+        }
+
         .geri-butonu {
-            background: #667eea;
+            background: #FF0000;
             color: white;
             padding: 15px 40px;
             border: none;
-            border-radius: 5px;
+            border-radius: 2px;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
             margin-bottom: 15px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .geri-butonu:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            background: #CC0000;
+            box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4);
         }
 
         .ana-sayfa {
             display: inline-block;
-            background: #95a5a6;
-            color: white;
+            background: transparent;
+            color: #AAAAAA;
             padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
+            border: 1px solid #3F3F3F;
+            border-radius: 2px;
             font-size: 14px;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
             margin-left: 10px;
+            font-weight: 500;
         }
 
         .ana-sayfa:hover {
-            background: #7f8c8d;
+            background: #3F3F3F;
+            color: #FFFFFF;
         }
 
         .kod {
-            background: #f5f5f5;
-            border: 1px solid #ddd;
+            background: #181818;
+            border: 1px solid #3F3F3F;
             padding: 15px;
             border-radius: 4px;
             font-family: 'Courier New', monospace;
-            color: #d32f2f;
+            color: #FF0000;
             margin-bottom: 20px;
             font-weight: bold;
             font-size: 32px;

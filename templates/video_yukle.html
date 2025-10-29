@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/stil.css') }}">
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0F0F0F;
             min-height: 100vh;
             padding: 40px 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', 'Arial', sans-serif;
             margin: 0;
         }
 
@@ -20,10 +20,10 @@
         }
 
         .header {
-            background: white;
-            padding: 30px;
-            border-radius: 10px 10px 0 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: #212121;
+            padding: 20px 30px;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -31,30 +31,35 @@
 
         .header h1 {
             margin: 0;
-            color: #333;
-            font-size: 24px;
+            color: #FFFFFF;
+            font-size: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .cikis-link {
-            color: #e74c3c;
+            color: #AAAAAA;
             text-decoration: none;
             font-size: 14px;
             padding: 8px 16px;
-            border: 1px solid #e74c3c;
-            border-radius: 4px;
+            border: 1px solid #3F3F3F;
+            border-radius: 2px;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         .cikis-link:hover {
-            background: #e74c3c;
-            color: white;
+            background: #3F3F3F;
+            color: #FFFFFF;
         }
 
         .form-container {
-            background: white;
+            background: #212121;
             padding: 40px;
-            border-radius: 0 0 10px 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .form-group {
@@ -64,33 +69,32 @@
         label {
             display: block;
             margin-bottom: 10px;
-            color: #333;
-            font-weight: 600;
+            color: #FFFFFF;
+            font-weight: 500;
             font-size: 14px;
         }
 
         .drop-zone {
-            border: 3px dashed #667eea;
+            border: 3px dashed #3F3F3F;
             border-radius: 8px;
             padding: 60px 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: #f8f9ff;
+            background: #181818;
             position: relative;
             overflow: hidden;
         }
 
         .drop-zone:hover {
-            background: #f0f2ff;
-            border-color: #764ba2;
-            transform: scale(1.02);
+            background: #282828;
+            border-color: #717171;
         }
 
         .drop-zone.dragover {
-            background: #e8ecff;
-            border-color: #764ba2;
-            transform: scale(1.05);
+            background: #282828;
+            border-color: #FF0000;
+            transform: scale(1.02);
         }
 
         .drop-zone-icon {
@@ -99,14 +103,14 @@
         }
 
         .drop-zone-text {
-            color: #667eea;
+            color: #FFFFFF;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 5px;
         }
 
         .drop-zone-hint {
-            color: #999;
+            color: #717171;
             font-size: 13px;
         }
 
@@ -115,8 +119,8 @@
         }
 
         .dosya-bilgisi {
-            background: #e8f4f8;
-            border-left: 4px solid #00bcd4;
+            background: rgba(62, 166, 255, 0.1);
+            border-left: 4px solid #3EA6FF;
             padding: 15px;
             border-radius: 4px;
             margin-top: 20px;
@@ -128,44 +132,46 @@
         }
 
         .dosya-adi {
-            font-weight: 600;
-            color: #00695c;
+            font-weight: 500;
+            color: #FFFFFF;
             margin-bottom: 5px;
         }
 
         .dosya-boyutu {
             font-size: 13px;
-            color: #00897b;
+            color: #AAAAAA;
         }
 
         .input-alan {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            border: 1px solid #3F3F3F;
+            border-radius: 2px;
             font-size: 14px;
             box-sizing: border-box;
             transition: all 0.3s ease;
+            background: #181818;
+            color: #FFFFFF;
         }
 
         .input-alan:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #3EA6FF;
+            background: #282828;
         }
 
         textarea.input-alan {
             resize: vertical;
             min-height: 100px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', 'Arial', sans-serif;
         }
 
         .zorunlu-isareti {
-            color: #e74c3c;
+            color: #FF0000;
         }
 
         .isteğe-bagli {
-            color: #999;
+            color: #717171;
             font-size: 12px;
             font-weight: normal;
         }
@@ -177,65 +183,68 @@
         }
 
         .yukle-butonu {
-            background: #27ae60;
+            background: #FF0000;
             color: white;
             padding: 15px 40px;
             border: none;
-            border-radius: 5px;
+            border-radius: 2px;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
             flex: 1;
-            font-weight: 600;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .yukle-butonu:hover:not(:disabled) {
-            background: #229954;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+            background: #CC0000;
+            box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4);
         }
 
         .yukle-butonu:disabled {
-            background: #95a5a6;
+            background: #3F3F3F;
             cursor: not-allowed;
             opacity: 0.6;
         }
 
         .iptal-butonu {
-            background: #e74c3c;
-            color: white;
+            background: transparent;
+            color: #AAAAAA;
             padding: 15px 40px;
-            border: none;
-            border-radius: 5px;
+            border: 1px solid #3F3F3F;
+            border-radius: 2px;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .iptal-butonu:hover {
-            background: #c0392b;
+            background: #3F3F3F;
+            color: #FFFFFF;
         }
 
         .yeni-dosya-sec {
             padding: 12px 20px;
-            background: #3498db;
+            background: #3EA6FF;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 2px;
             cursor: pointer;
             font-size: 14px;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         .yeni-dosya-sec:hover {
-            background: #2980b9;
+            background: #2A8FE8;
         }
 
         .ilerleme-cubugu {
             width: 100%;
-            height: 6px;
-            background: #ecf0f1;
-            border-radius: 3px;
+            height: 4px;
+            background: #3F3F3F;
+            border-radius: 2px;
             overflow: hidden;
             margin-top: 20px;
             display: none;
@@ -247,7 +256,7 @@
 
         .ilerleme-barı {
             height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: #FF0000;
             width: 0%;
             transition: width 0.3s ease;
         }
@@ -265,31 +274,35 @@
         }
 
         .durum-mesaji.basarili {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
+            background: rgba(15, 157, 88, 0.1);
+            border: 1px solid #0F9D58;
+            color: #0F9D58;
         }
 
         .durum-mesaji.hata {
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #FF0000;
+            color: #FF0000;
         }
 
         .durum-mesaji.bilgi {
-            background: #d1ecf1;
-            border: 1px solid #bee5eb;
-            color: #0c5460;
+            background: rgba(62, 166, 255, 0.1);
+            border: 1px solid #3EA6FF;
+            color: #3EA6FF;
         }
 
         .baslangic-mesaji {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
+            background: rgba(255, 187, 0, 0.1);
+            border-left: 4px solid #FFBB00;
             padding: 15px;
             border-radius: 4px;
             margin-bottom: 30px;
-            color: #856404;
+            color: #AAAAAA;
             font-size: 13px;
+        }
+
+        .baslangic-mesaji strong {
+            color: #FFBB00;
         }
 
         .iki-sutun {
@@ -311,16 +324,16 @@
             align-items: flex-start;
             cursor: pointer;
             padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
+            border: 2px solid #3F3F3F;
+            border-radius: 8px;
             transition: all 0.3s ease;
-            background: #fafafa;
+            background: #181818;
         }
 
         .gizlilik-option:hover,
         .video-tipi-option:hover {
-            border-color: #667eea;
-            background: #f5f7ff;
+            border-color: #717171;
+            background: #282828;
         }
 
         .gizlilik-option input[type="radio"],
@@ -330,17 +343,12 @@
             cursor: pointer;
             width: 18px;
             height: 18px;
+            accent-color: #FF0000;
         }
 
         .gizlilik-option input[type="radio"]:checked + .gizlilik-label,
         .video-tipi-option input[type="radio"]:checked + .video-tipi-label {
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        .gizlilik-option input[type="radio"]:checked,
-        .video-tipi-option input[type="radio"]:checked {
-            accent-color: #667eea;
+            color: #FFFFFF;
         }
 
         .gizlilik-label,
@@ -353,19 +361,15 @@
 
         .gizlilik-label strong,
         .video-tipi-label strong {
-            color: #333;
+            color: #FFFFFF;
             font-size: 15px;
+            font-weight: 500;
         }
 
         .gizlilik-label small,
         .video-tipi-label small {
-            color: #999;
+            color: #717171;
             font-size: 12px;
-        }
-
-        .gizlilik-option input[type="radio"]:checked + .gizlilik-label strong,
-        .video-tipi-option input[type="radio"]:checked + .video-tipi-label strong {
-            color: #667eea;
         }
 
         @media (max-width: 768px) {
@@ -435,7 +439,7 @@
                         </label>
                         <input type="text" id="video_baslik" name="video_baslik" class="input-alan"
                                placeholder="Örn: Harika Yolculuğum" maxlength="100">
-                        <small style="color: #999; display: block; margin-top: 5px;">En fazla 100 karakter</small>
+                        <small style="color: #717171; display: block; margin-top: 5px;">En fazla 100 karakter</small>
                     </div>
 
                     <!-- Video Etiketleri -->
@@ -445,7 +449,7 @@
                         </label>
                         <input type="text" id="video_taglari" name="video_taglari" class="input-alan"
                                placeholder="Örn: seyahat, vlog, eğlence">
-                        <small style="color: #999; display: block; margin-top: 5px;">Virgülle ayırarak ekleyin</small>
+                        <small style="color: #717171; display: block; margin-top: 5px;">Virgülle ayırarak ekleyin</small>
                     </div>
                 </div>
 
@@ -539,7 +543,7 @@
     <script>
         const uploadUrl = "{{ url_for('dosyayı_yukle') }}";
         const sonucUrl = "{{ url_for('sonuc') }}";
-        console.log('Sonuç URL:', sonucUrl); // Debug için
+        console.log('Sonuç URL:', sonucUrl);
     </script>
     <script src="{{ url_for('static', filename='js/yukle.js') }}"></script>
     

@@ -12,19 +12,19 @@
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0F0F0F;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', 'Arial', sans-serif;
             padding: 20px;
         }
 
         .sonuc-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            background: #212121;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             padding: 50px 40px;
             max-width: 600px;
             width: 100%;
@@ -59,21 +59,22 @@
         }
 
         h1 {
-            color: #27ae60;
+            color: #0F9D58;
             margin-bottom: 10px;
             font-size: 28px;
+            font-weight: 500;
         }
 
         .mesaj {
-            color: #666;
+            color: #AAAAAA;
             margin-bottom: 30px;
             font-size: 16px;
             line-height: 1.6;
         }
 
         .video-bilgisi {
-            background: #e8f4f8;
-            border: 2px solid #00bcd4;
+            background: #181818;
+            border: 2px solid #3F3F3F;
             border-radius: 8px;
             padding: 25px;
             margin-bottom: 30px;
@@ -83,7 +84,7 @@
         .bilgi-satiri {
             margin-bottom: 15px;
             padding-bottom: 15px;
-            border-bottom: 1px solid #b3e5fc;
+            border-bottom: 1px solid #3F3F3F;
         }
 
         .bilgi-satiri:last-child {
@@ -94,8 +95,8 @@
 
         .bilgi-etiketi {
             font-size: 12px;
-            color: #00695c;
-            font-weight: 600;
+            color: #717171;
+            font-weight: 500;
             margin-bottom: 5px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -103,21 +104,19 @@
 
         .bilgi-degeri {
             font-size: 16px;
-            color: #00897b;
+            color: #FFFFFF;
             word-break: break-all;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .bilgi-degeri a {
-            color: #00897b;
+            color: #3EA6FF;
             text-decoration: none;
             transition: all 0.3s ease;
-            border-bottom: 1px solid #00897b;
         }
 
         .bilgi-degeri a:hover {
-            color: #004d40;
-            border-bottom-color: #004d40;
+            color: #FFFFFF;
         }
 
         .buton-grubu {
@@ -130,76 +129,78 @@
             flex: 1;
             padding: 15px 30px;
             border: none;
-            border-radius: 5px;
+            border-radius: 2px;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-weight: 600;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .youtube-git {
-            background: #ff0000;
+            background: #FF0000;
             color: white;
         }
 
         .youtube-git:hover {
-            background: #cc0000;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+            background: #CC0000;
+            box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4);
         }
 
         .yeni-yukle {
-            background: #667eea;
-            color: white;
+            background: transparent;
+            color: #AAAAAA;
+            border: 1px solid #3F3F3F;
         }
 
         .yeni-yukle:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            background: #3F3F3F;
+            color: #FFFFFF;
         }
 
         .sozlesmeler {
             margin-top: 30px;
             font-size: 12px;
-            color: #999;
+            color: #717171;
         }
 
         .sozlesmeler a {
-            color: #667eea;
+            color: #3EA6FF;
             text-decoration: none;
         }
 
         .sozlesmeler a:hover {
-            text-decoration: underline;
+            color: #FFFFFF;
         }
 
         .komut {
-            background: #f5f5f5;
-            border: 1px solid #ddd;
+            background: #181818;
+            border: 1px solid #3F3F3F;
             padding: 10px;
             border-radius: 4px;
             font-family: 'Courier New', monospace;
             font-size: 12px;
-            color: #333;
+            color: #AAAAAA;
             margin-top: 10px;
             word-break: break-all;
         }
 
         .kopya-butonu {
-            background: #3498db;
+            background: #3EA6FF;
             color: white;
             border: none;
             padding: 8px 15px;
-            border-radius: 4px;
+            border-radius: 2px;
             cursor: pointer;
             font-size: 12px;
             margin-top: 10px;
             transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         .kopya-butonu:hover {
-            background: #2980b9;
+            background: #2A8FE8;
         }
 
         @media (max-width: 600px) {
@@ -325,10 +326,10 @@
             analizHTML += `<div style="margin-bottom: 8px;">📐 <strong>En-boy Oranı:</strong> ${analiz.en_boy_oranı}:1</div>`;
 
             if (analiz.uyari) {
-                analizHTML += `<div style="margin-top: 10px; padding: 8px; background: #fff3cd; border-radius: 4px; font-size: 13px;">${analiz.uyari}</div>`;
+                analizHTML += `<div style="margin-top: 10px; padding: 8px; background: rgba(255, 187, 0, 0.1); border-radius: 4px; font-size: 13px; color: #FFBB00;">${analiz.uyari}</div>`;
             }
             if (analiz.notu) {
-                analizHTML += `<div style="margin-top: 10px; padding: 8px; background: #d4edda; border-radius: 4px; font-size: 13px;">${analiz.notu}</div>`;
+                analizHTML += `<div style="margin-top: 10px; padding: 8px; background: rgba(15, 157, 88, 0.1); border-radius: 4px; font-size: 13px; color: #0F9D58;">${analiz.notu}</div>`;
             }
 
             analizDiv.innerHTML = analizHTML;

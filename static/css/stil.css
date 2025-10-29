@@ -1,6 +1,6 @@
 /*
    YouTube Video Yükleme Sistemi - Stil Dosyası
-   Tüm sayfalar için genel stiller ve tema tanımlamaları
+   YouTube Teması - Koyu Mod
 */
 
 * {
@@ -10,22 +10,25 @@
 }
 
 :root {
-    /* Ana Renkler */
-    --renk-ana: #667eea;
-    --renk-ikincil: #764ba2;
-    --renk-basarili: #27ae60;
-    --renk-hata: #e74c3c;
-    --renk-uyari: #f39c12;
-    --renk-bilgi: #00bcd4;
-
+    /* YouTube Renkleri */
+    --youtube-kirmizi: #FF0000;
+    --youtube-koyu-kirmizi: #CC0000;
+    --youtube-siyah: #0F0F0F;
+    --youtube-koyu-gri: #212121;
+    --youtube-orta-gri: #3F3F3F;
+    --youtube-ac-gri: #717171;
+    --youtube-beyaz: #FFFFFF;
+    --youtube-mavi: #3EA6FF;
+    
     /* Metin Renkleri */
-    --renk-metin-koyu: #333;
-    --renk-metin-orta: #666;
-    --renk-metin-ac: #999;
+    --renk-metin-beyaz: #FFFFFF;
+    --renk-metin-ac: #AAAAAA;
+    --renk-metin-orta: #717171;
 
     /* Arkaplan Renkleri */
-    --renk-arka-beyaz: #ffffff;
-    --renk-arka-ac: #f8f9fa;
+    --renk-arka-koyu: #0F0F0F;
+    --renk-arka-orta: #212121;
+    --renk-arka-ac: #3F3F3F;
 
     /* Temel Boyutlar */
     --boyut-padding-kucuk: 10px;
@@ -43,21 +46,21 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--renk-metin-orta);
-    background: var(--renk-arka-ac);
+    font-family: 'Roboto', 'Arial', sans-serif;
+    color: var(--renk-metin-beyaz);
+    background: var(--youtube-siyah);
     line-height: 1.6;
 }
 
 /* Linkler */
 a {
-    color: var(--renk-ana);
+    color: var(--youtube-mavi);
     text-decoration: none;
     transition: all var(--gecis-normal) ease;
 }
 
 a:hover {
-    color: var(--renk-ikincil);
+    color: var(--youtube-beyaz);
 }
 
 /* Butonlar */
@@ -67,23 +70,24 @@ button {
 
 /* Başlıklar */
 h1, h2, h3, h4, h5, h6 {
-    color: var(--renk-metin-koyu);
+    color: var(--renk-metin-beyaz);
     margin-bottom: var(--boyut-padding-orta);
+    font-weight: 500;
 }
 
 h1 {
     font-size: 28px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 h2 {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 h3 {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 /* Form Elemanları */
@@ -95,19 +99,21 @@ textarea,
 select {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid var(--youtube-orta-gri);
+    border-radius: 2px;
     font-size: 14px;
     font-family: inherit;
     transition: all var(--gecis-normal) ease;
+    background: var(--youtube-koyu-gri);
+    color: var(--youtube-beyaz);
 }
 
 input:focus,
 textarea:focus,
 select:focus {
     outline: none;
-    border-color: var(--renk-ana);
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: var(--youtube-mavi);
+    background: var(--youtube-orta-gri);
 }
 
 textarea {
@@ -122,16 +128,16 @@ textarea {
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--renk-arka-ac);
+    background: var(--youtube-koyu-gri);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--renk-ana);
+    background: var(--youtube-orta-gri);
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--renk-ikincil);
+    background: var(--youtube-ac-gri);
 }
 
 /* Responsive Tasarım */
@@ -246,48 +252,48 @@ textarea {
 
 /* Card Tasarımı */
 .kart {
-    background: var(--renk-arka-beyaz);
-    border-radius: 8px;
+    background: var(--youtube-koyu-gri);
+    border-radius: 12px;
     padding: var(--boyut-padding-orta);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     transition: all var(--gecis-normal) ease;
 }
 
 .kart:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     transform: translateY(-4px);
 }
 
 /* Alert Stil */
 .uyari, .bildirim {
     padding: var(--boyut-padding-orta);
-    border-radius: 4px;
+    border-radius: 8px;
     margin-bottom: var(--boyut-padding-orta);
     font-size: 14px;
 }
 
 .uyari-bilgi {
-    background: #d1ecf1;
-    border: 1px solid #bee5eb;
-    color: #0c5460;
+    background: rgba(62, 166, 255, 0.1);
+    border: 1px solid rgba(62, 166, 255, 0.3);
+    color: var(--youtube-mavi);
 }
 
 .uyari-basarili {
-    background: #d4edda;
-    border: 1px solid #c3e6cb;
-    color: #155724;
+    background: rgba(15, 157, 88, 0.1);
+    border: 1px solid rgba(15, 157, 88, 0.3);
+    color: #0F9D58;
 }
 
 .uyari-hata {
-    background: #f8d7da;
-    border: 1px solid #f5c6cb;
-    color: #721c24;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    color: var(--youtube-kirmizi);
 }
 
 .uyari-uyari {
-    background: #fff3cd;
-    border: 1px solid #ffeeba;
-    color: #856404;
+    background: rgba(255, 187, 0, 0.1);
+    border: 1px solid rgba(255, 187, 0, 0.3);
+    color: #FFBB00;
 }
 
 /* Loader */
@@ -295,8 +301,8 @@ textarea {
     display: inline-block;
     width: 20px;
     height: 20px;
-    border: 3px solid rgba(102, 126, 234, 0.3);
-    border-top-color: var(--renk-ana);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: var(--youtube-kirmizi);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -311,6 +317,7 @@ textarea {
 @media print {
     body {
         background: white;
+        color: black;
     }
 
     .gizle-yazici {
